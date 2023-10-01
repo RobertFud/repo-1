@@ -38,7 +38,7 @@ public class ShapeCalculator
             if (response.equals("C"))
             {
                 System.out.print("Enter the radius: ");
-                double radius = scan.nextInt();
+                double radius = scan.nextDouble();
                 scan.nextLine();
                 System.out.printf("The area of the circle is %.2f, and the circumference is %.2f.\n",computeCircleArea(radius) ,computeCircleCircumference(radius));
             }
