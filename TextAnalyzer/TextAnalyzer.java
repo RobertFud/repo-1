@@ -15,8 +15,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
-//C:\Users\robr1\OneDrive\Desktop\story.txt
-//C:\Users\robr1\OneDrive\Desktop\text.txt
 public class TextAnalyzer 
 {
     public static void main(String[] args)
