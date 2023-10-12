@@ -92,6 +92,7 @@ public class Payday
             tax = grossPayFinal * .05;
             grossPayFinal -= tax;
         }
+        scan.close();
 
         //Prints out the final paycheck
         System.out.println("\n---------PAYCHECK---------");//9 "-"s 8 letters 9 "-"s
