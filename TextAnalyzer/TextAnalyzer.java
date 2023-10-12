@@ -35,19 +35,6 @@ public class TextAnalyzer
         } while (fileString == null);
         boolean noError;
         int response = 0;
-        /*try
-        {
-            Scanner fileScan = new Scanner(new File(fileName));
-            String fileString = "";
-            
-            
-            while (fileScan.hasNextLine())
-            {
-                fileString += fileScan.nextLine();
-                fileString += " ";
-            }
-            fileString = fileString.trim();
-            */
             
 
             do
@@ -72,35 +59,14 @@ public class TextAnalyzer
                 
                 if (response == 1)
                 {
-                    /*int totalVowels = 0;
-                    for (int i = 0; i < fileString.length(); i++)
-                    {
-                        if (fileString.substring(i,i+1).toLowerCase().equals("a") || fileString.substring(i,i+1).toLowerCase().equals("e") || fileString.substring(i,i+1).toLowerCase().equals("i") || fileString.substring(i,i+1).toLowerCase().equals("o") || fileString.substring(i,i+1).toLowerCase().equals("u"))
-                        {
-                            totalVowels++;
-                        }
-                    }*/
                     System.out.printf("There are %d vowels.\n\n", countVowels(fileString));
                 }
                 else if (response == 2)
                 {
-                    /*int totalConsonents = 0;
-                    for (int i = 0; i < fileString.length(); i++)
-                    {
-                        if (((int)(fileString.toUpperCase().charAt(i))) > 65 && ((int)(fileString.toUpperCase().charAt(i))) <= 90 && ((int)(fileString.toUpperCase().charAt(i))) != 65 && ((int)(fileString.toUpperCase().charAt(i))) != 69 && ((int)(fileString.toUpperCase().charAt(i))) != 73 && ((int)(fileString.toUpperCase().charAt(i))) != 79 && ((int)(fileString.toUpperCase().charAt(i))) != 85)
-                        {
-                            totalConsonents++;
-                        }
-                    }*/
                     System.out.printf("There are %d consonents.\n\n", countConsonents(fileString));
                 }
                 else if (response == 3)
                 {
-                    /*int totalWords = 0;
-                    for (int i = 0; i < fileString.length(); i++)
-                    {
-                        
-                    }*/
                     System.out.printf("There are %d words.\n\n", countWords(fileString));
                 }
                 else if (response == 4)
@@ -127,14 +93,6 @@ public class TextAnalyzer
             } while (response != 5);
             scan.close();
             System.out.println("Thank you for using this program.");
-
-        //}
-        /*catch (Exception ex)
-        {
-            //ex.printStackTrace();
-            System.out.println("Something went wrong opening the file");
-        }*/
-
     }
 
     /**
