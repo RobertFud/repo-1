@@ -217,7 +217,7 @@ public class TextAnalyzer
         {
             Scanner file = new Scanner(new File(fileToWriteName)); //THIS IS HERE TO MAKE AN ERROR IF THE FILE DOESN'T EXIST
             file.close();
-            PrintWriter textWriter = new PrintWriter(new BufferedWriter(new FileWriter(new File(fileToWriteName))));
+            /* WAS WRONG!!!!!*/ PrintWriter textWriter = new PrintWriter(new BufferedWriter(new FileWriter(new File(fileToWriteName))));
             textWriter.println("This is the text:");
             textWriter.println(fileToSummarize);
             textWriter.printf("\nThere are %d vowels, %d consonents, and %d words.", countVowels(fileToSummarize), countConsonents(fileToSummarize), countWords(fileToSummarize));
