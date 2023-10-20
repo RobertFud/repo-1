@@ -1,13 +1,22 @@
 package Madlibs;
 
+/*
+ * Robert Fudala
+ * 10/19/2023
+ * Madlibs
+ * 
+ * This function takes in the location of the madlibs files
+ * and story files and then asks the user which story would
+ * they like to make a madlib out of. Then it makes the madlib
+ * and prints it out for the user. It repeats this until
+ * the user quits.
+ */
+
 import java.util.Scanner;
 import java.util.Random;
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.ArrayList;
-
-// C:\Users\robr1\OneDrive\Desktop\Madlibs
-// STRINGS HAVE .replace()
 
 public class Madlibs 
 {
@@ -15,10 +24,11 @@ public class Madlibs
     {
         printBanner();
         Scanner scan = new Scanner(System.in);
-        String fileLocation;// = "c:\\temp\\ml";
+        String fileLocation;
         System.out.print("Enter the name of the folder where the stories and wordlists are.\nOr just press Enter to accept the default location: ");
         fileLocation = scan.nextLine().trim();
         System.out.println();
+
         String response;
         String[] adj = fileToArray(new File(fileLocation,"adj.txt"));
         String[] adv = fileToArray(new File(fileLocation,"adv.txt"));
@@ -28,6 +38,10 @@ public class Madlibs
         String[] singnoun = fileToArray(new File(fileLocation,"singnoun.txt"));
         String[] singverb = fileToArray(new File(fileLocation,"singverb.txt"));
         LinkedHashMap<String,String[]> partsOfSpeech = new LinkedHashMap<String,String[]>();
+        ArrayList<String> fileStrings = new ArrayList<String>();
+        String[] listOfSpeech = {"adj","adv","pastverb","plunoun","pluverb","singnoun","singverb"};
+        Random random = new Random();
+
         partsOfSpeech.put("adj", adj);
         partsOfSpeech.put("adv", adv);
         partsOfSpeech.put("pastverb", pastverb);
@@ -35,13 +49,6 @@ public class Madlibs
         partsOfSpeech.put("pluverb", pluverb);
         partsOfSpeech.put("singnoun", singnoun);
         partsOfSpeech.put("singverb", singverb);
-        ArrayList<String> fileString = new ArrayList<String>();
-
-        if (adj == null || adv == null || pastverb == null || plunoun == null || pluverb == null || singnoun == null || singverb == null)
-        {
-            System.out.println("Something went wrong reading the madlib files");
-            return;
-        }
 
         do
         {
@@ -49,9 +56,24 @@ public class Madlibs
             response = scan.nextLine().trim();
             if (checkFile(new File(fileLocation,("story" + response + ".txt"))))
             {
-                //System.out.println("That story exists!!!\n");
-                
-
+                fileStrings = fileToArrayList(new File(fileLocation,("story" + response + ".txt")));
+                for (int i = 0; i < listOfSpeech.length; i++)
+                {
+                    for (int j = 0; j < fileStrings.size(); j++)
+                    {
+                        while(fileStrings.get(j).indexOf("<" + listOfSpeech[i] + ">") >= 0)
+                        {
+                            //I'M SORRY THIS LOOKS SO BAD I JUST REALLY WANTED TO USE LINKEDHASHMAPS BUT THEY MADE THIS SO MUCH MORE COMPLICATED THAN IT HAD TO BE.
+                            fileStrings.set(j,fileStrings.get(j).replaceFirst("<" + listOfSpeech[i] + ">", partsOfSpeech.get(listOfSpeech[i])[random.nextInt(partsOfSpeech.get(listOfSpeech[i]).length)]));
+                        }
+                    }
+                }
+                System.out.println("\nHere is your Madlib:\n");
+                for (String storys : fileStrings)
+                {
+                    System.out.println(storys);
+                }
+                System.out.println();
             }
             else if (response.toLowerCase().equals("q")){}
             else
@@ -59,8 +81,13 @@ public class Madlibs
                 System.out.println("That story does not exist. Choose again.\n");
             }
         } while(!(response.toLowerCase().equals("q")));
+        System.out.println("Thank you for using this program.");
+        scan.close();
     }
-
+    /**
+     * Simply prints out the welcome banner
+     * with no parameter or return
+     */
     public static void printBanner()
     {
         System.out.println("*".repeat(65));
@@ -68,6 +95,12 @@ public class Madlibs
         System.out.println("*".repeat(65));
         System.out.println("\nThis program generates random stories using wordlists you supply.\n");
     }
+    /**
+     * 
+     * @param file is the file that the user entered
+     * @return the return is true if the file exists
+     * or false if the file doesn't exist
+     */
     public static boolean checkFile(File file)
     {
         boolean noError;
@@ -83,6 +116,13 @@ public class Madlibs
         }
         return noError;
     }
+    /**
+     * 
+     * @param file takes in a file
+     * @return the return is an array of strings
+     * of the file that was passed in breaking it
+     * up at the end of lines
+     */
     public static String[] fileToArray(File file)
     {
         try
@@ -94,7 +134,6 @@ public class Madlibs
                 fileString += fileScan.nextLine();
                 fileString += "\t";
             }
-            //System.out.println(fileString);
             fileScan.close();
             return fileString.split("\t");
         }
@@ -103,5 +142,29 @@ public class Madlibs
             return null;
         }
     }
-    //public static 
+    /**
+     * 
+     * @param file takes in a file
+     * @return the return is an ArrayList of strings
+     * of the file that was passed in breaking it
+     * up at the end of lines
+     */
+    public static ArrayList<String> fileToArrayList(File file)
+    {
+        try
+        {
+            Scanner fileScan = new Scanner(file);
+            ArrayList<String> fileArrayList = new ArrayList<String>();
+            while (fileScan.hasNextLine())
+            {
+                fileArrayList.add(fileScan.nextLine());
+            }
+            fileScan.close();
+            return fileArrayList;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
 }
