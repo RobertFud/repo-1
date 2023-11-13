@@ -2,16 +2,12 @@ package ExerciseTracker;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-//import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.io.File;
 
 public class ExerciseTrackerApp
 {
-    //Collections.sort(list) natSortOrder
-    //Collections.sort(list, what to sort by as a class)
-    //  C:\Users\robr1\OneDrive\Desktop\text.txt
 
     public static void main(String[] args)
     {
@@ -191,12 +187,14 @@ public class ExerciseTrackerApp
             else if (response == 3)
             {
                 Collections.sort(exercises);
+                System.out.println("Here are the exercises sorted by date:");
                 ExerciseWriter.writeToScreen(exercises);
                 System.out.println();
             }
             else if (response == 4)
             {
                 Collections.sort(exercises, calorieSorter);
+                System.out.println("Here are the exercises sorted by calories:");
                 ExerciseWriter.writeToScreen(exercises);
                 System.out.println();
             }
