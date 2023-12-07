@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 public abstract class Exercise implements Comparable<Exercise>
 {
-    private SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
+    protected SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
     private String name;
     private Date date;
     private double minutes;
